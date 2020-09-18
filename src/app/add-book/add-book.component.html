@@ -1,0 +1,74 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Add Single Book">
+    <form
+      novalidate
+      [formGroup]="bookForm"
+      #bookform
+      (ngSubmit)="onSubmit()"
+      *ngIf="hideAddSpinner"
+    >
+      <mat-form-field appearance="fill">
+        <mat-label>SkuId</mat-label>
+        <input matInput placeholder="Enter the skuId" formControlName="skuId" />
+        <mat-error *ngIf="formErrors.skuId">{{ formErrors.skuId }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          placeholder="Enter the name of book"
+          formControlName="name"
+        />
+        <mat-error *ngIf="formErrors.name">{{ formErrors.name }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Stocks</mat-label>
+        <input
+          matInput
+          placeholder="Enter the current stock of book"
+          formControlName="stocks"
+          pattern="[0-9]*"
+        />
+        <mat-error *ngIf="formErrors.stocks">{{ formErrors.stocks }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Publisher</mat-label>
+        <input
+          matInput
+          placeholder="Enter the current stock of book"
+          formControlName="publisher"
+        />
+        <mat-error *ngIf="formErrors.publisher">{{
+          formErrors.publisher
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input
+          matInput
+          placeholder="Enter the current stock of book"
+          formControlName="price"
+          pattern="[0-9]*"
+        />
+        <mat-error *ngIf="formErrors.price">{{ formErrors.price }}</mat-error>
+      </mat-form-field>
+      <br />
+      <button
+        type="submit"
+        [disabled]="bookForm.invalid"
+        mat-raised-button
+        color="primary"
+      >
+        Add Book
+      </button>
+    </form>
+  </mat-tab>
+  <mat-tab label="Add Multiple Books">
+    <div style="margin-top: 40px">
+      <app-file-upload-books></app-file-upload-books>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<div class="addingSpinner" *ngIf="!hideAddSpinner">
+  <img src="../../assets/images/Bean Eater-1s-50px.gif" alt="loading" />
+</div>

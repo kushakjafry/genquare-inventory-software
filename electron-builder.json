@@ -1,0 +1,42 @@
+{
+  "productName": "Genquare Inventory",
+  "directories": {
+    "output": "release/"
+  },
+  "files": [
+    "**/*",
+    "!**/*.ts",
+    "!*.code-workspace",
+    "!LICENSE.md",
+    "!package.json",
+    "!package-lock.json",
+    "!src/",
+    "!e2e/",
+    "!hooks/",
+    "!angular.json",
+    "!_config.yml",
+    "!karma.conf.js",
+    "!tsconfig.json",
+    "!tslint.json"
+  ],
+  "win": {
+    "icon": "dist/assets/icons/logo_release.ico",
+    "target": ["nsis"]
+  },
+  "nsis": {
+    "installerIcon": "src/assets/icons/logo_release.ico",
+    "uninstallerIcon": "src/assets/icons/logo_release.ico",
+    "uninstallDisplayName": "genquare-inventory",
+    "license": "license.txt",
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true
+  },
+  "mac": {
+    "icon": "dist/assets/icons",
+    "target": ["dmg"]
+  },
+  "linux": {
+    "icon": "dist/assets/icons",
+    "target": ["AppImage"]
+  }
+}

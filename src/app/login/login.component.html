@@ -1,0 +1,48 @@
+<div class="main_container">
+  <div class="login_form mat-elevation-z4">
+    <mat-toolbar color="primary">Login Form</mat-toolbar>
+    <form
+      novalidate
+      #loginform="ngForm"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          placeholder="Enter your username"
+          formControlName="username"
+          type="text"
+        />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-error *ngIf="formErrors.username">{{
+          formErrors.username
+        }}</mat-error>
+        <mat-hint>Enter your email/username</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Enter your username"
+          sentiment_very_satisfied
+          formControlName="password"
+          type="password"
+        />
+        <mat-icon matSuffix>enhanced_encryption</mat-icon>
+        <mat-error *ngIf="formErrors.password">{{
+          formErrors.password
+        }}</mat-error>
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="loginForm.invalid"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>

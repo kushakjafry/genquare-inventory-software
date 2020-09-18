@@ -1,0 +1,113 @@
+<mat-tab-group
+  mat-align-tabs="center"
+  (selectedIndexChange)="onTabClick($event)"
+  (animationDone)="afterTabOpen()"
+>
+  <mat-tab label="ADD TO STOCK">
+    <div class="book addBook" [ngClass]="{ backdrop: !showAddForm }">
+      <form
+        novalidate
+        [formGroup]="addForm"
+        #addform="ngForm"
+        (ngSubmit)="onAdd()"
+      >
+        <mat-form-field appearance="fill" class="skuIDEnter">
+          <mat-label>SkuId</mat-label>
+          <input
+            matInput
+            placeholder="Enter the skuId"
+            [appAutofocus]="true"
+            formControlName="skuIdAdd"
+            required
+            #addSku
+          />
+          <mat-error *ngIf="formErrors.skuIdAdd">{{
+            formErrors.skuIdAdd
+          }}</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="addForm.invalid">
+          Add Book
+        </button>
+      </form>
+    </div>
+    <div *ngIf="showAddForm && addDataSource" class="addTable">
+      <table mat-table [dataSource]="addDataSource" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- skuId Column -->
+        <ng-container matColumnDef="skuId">
+          <th mat-header-cell *matHeaderCellDef>SkuId</th>
+          <td mat-cell *matCellDef="let row">{{ row.skuId }}</td>
+        </ng-container>
+
+        <!-- Stocks Column -->
+        <ng-container matColumnDef="stocks">
+          <th mat-header-cell *matHeaderCellDef>Stock added</th>
+          <td mat-cell *matCellDef="let row">{{ row.stocks }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <div class="spinner" *ngIf="!showAddForm">
+      <img src="../../assets/images/Bean Eater-1s-50px.gif" alt="spinner" />
+    </div>
+  </mat-tab>
+  <mat-tab label="REMOVE FROM STOCK">
+    <div class="book removeBook" [ngClass]="{ backdrop: !showRemoveForm }">
+      <form
+        novalidate
+        [formGroup]="removeForm"
+        #removeform="ngForm"
+        (ngSubmit)="onRemove()"
+      >
+        <mat-form-field appearance="fill" class="skuIDEnter">
+          <mat-label>SkuId</mat-label>
+          <input
+            matInput
+            placeholder="Enter the skuId"
+            required
+            #removeSku
+            formControlName="skuIdRemove"
+          />
+          <mat-error *ngIf="formErrors.skuIdRemove">{{
+            formErrors.skuIdRemove
+          }}</mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="removeForm.invalid"
+        >
+          Remove Book
+        </button>
+      </form>
+    </div>
+    <div *ngIf="showRemoveForm && removeDataSource" class="table">
+      <table mat-table [dataSource]="removeDataSource" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- skuId Column -->
+        <ng-container matColumnDef="skuId">
+          <th mat-header-cell *matHeaderCellDef>SkuId</th>
+          <td mat-cell *matCellDef="let row">{{ row.skuId }}</td>
+        </ng-container>
+
+        <!-- Stocks Column -->
+        <ng-container matColumnDef="stocks">
+          <th mat-header-cell *matHeaderCellDef>Stock added</th>
+          <td mat-cell *matCellDef="let row">{{ row.stocks }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <div class="spinner" *ngIf="!showRemoveForm">
+      <img src="../../assets/images/Bean Eater-1s-50px.gif" alt="spinner" />
+    </div>
+  </mat-tab>
+</mat-tab-group>

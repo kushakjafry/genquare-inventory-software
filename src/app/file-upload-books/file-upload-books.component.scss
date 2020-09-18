@@ -1,0 +1,47 @@
+:host {
+  margin-top: 40px;
+}
+.fileName,
+.fileError {
+  display: inline-block;
+  font-size: large;
+  margin-bottom: 10px;
+}
+.fileName {
+  color: green;
+}
+.fileError {
+  color: red;
+}
+.startingSpinner {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #423f3f73;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+.booksFailed,
+.booksUploaded {
+  display: inline-block;
+  width: 40%;
+  margin-top: 20px;
+  margin-left: 5%;
+}
+.booksFailed {
+  tr {
+    background-color: #f9e2e2;
+  }
+  .booksUploaded {
+    tr {
+      background-color: rgb(13, 153, 76);
+    }
+  }
+  table {
+    width: 100%;
+  }
+}

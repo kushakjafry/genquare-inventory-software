@@ -1,0 +1,114 @@
+<mat-sidenav-container class="sidenav-container mat-app-background">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    [ngClass]="{ hidden: !(isHandset$ | async) === true }"
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar
+      color="primary"
+      style="
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        align-items: flex-start;
+      "
+    >
+      <div style="margin-top: 20px">
+        <img src="assets/icons/logo.png" alt="logo" width="168px" />
+      </div>
+      <div class="brand-name" style="font-size: medium">GENQUARE INVENTORY</div>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/book']" routerLinkActive="active-link"
+        >Book List</a
+      >
+      <a
+        mat-list-item
+        [routerLink]="['/addbook']"
+        routerLinkActive="active-link"
+        >Add Book</a
+      >
+      <a mat-list-item [routerLink]="['/scan']" routerLinkActive="active-link"
+        >Scan</a
+      >
+      <a mat-list-item [routerLink]="['/sync']" routerLinkActive="active-link"
+        >Sync</a
+      >
+      <a
+        mat-list-item
+        [routerLink]="['/login']"
+        routerLinkActive="active-link"
+        *ngIf="!username"
+        >Login</a
+      >
+      <a mat-list-item *ngIf="username" (click)="logOut()">Logout</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" style="height: 75px">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <img
+        class="main_svg"
+        src="assets/icons/logo.png"
+        alt="logo"
+        height="55px"
+      />
+      <div class="spacer"></div>
+      <div class="main_toolbar_links" [hidden]="isHandset$ | async">
+        <a
+          [routerLink]="['/book']"
+          routerLinkActive="active-link"
+          class="main_toolbar_link"
+          >Book list</a
+        >
+        <a
+          [routerLink]="['/scan']"
+          routerLinkActive="active-link"
+          class="main_toolbar_link"
+          >Scan</a
+        >
+        <a
+          [routerLink]="['/sync']"
+          routerLinkActive="active-link"
+          class="main_toolbar_link"
+          >Sync</a
+        >
+        <a
+          [routerLink]="['/addbook']"
+          routerLinkActive="active-link"
+          class="main_toolbar_link"
+          >Add Book</a
+        >
+        <a
+          [routerLink]="['/login']"
+          routerLinkActive="active-link"
+          class="main_toolbar_link"
+          *ngIf="!username"
+          >Login</a
+        >
+        <a class="main_toolbar_link active-link" *ngIf="username">{{
+          username
+        }}</a>
+        <a
+          class="main_toolbar_link logout_link"
+          *ngIf="username"
+          (click)="logOut()"
+          >Logout</a
+        >
+      </div>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
