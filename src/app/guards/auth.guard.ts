@@ -6,6 +6,7 @@ import {
   UrlTree,
   Router,
 } from "@angular/router";
+import { SnackbarService } from "app/services/snackbar.service";
 import { Observable } from "rxjs";
 import { AuthService } from "../services/auth.service";
 
@@ -13,7 +14,11 @@ import { AuthService } from "../services/auth.service";
   providedIn: "root",
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private snackbarService: SnackbarService
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -23,11 +28,19 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     const JSONUser = JSON.parse(localStorage.getItem("JWT"));
-    if (JSONUser) {
-      return true;
+    if (navigator.onLine) {
+      if (JSONUser) {
+        return true;
+      } else {
+        this.snackbarService.openSnackBar(
+          `Kindly login to open the page`,
+          "cancel"
+        );
+        this.router.navigate(["/login"]);
+        return false;
+      }
     } else {
-      this.router.navigate(["/login"]);
-      return false;
+      return true;
     }
   }
 }

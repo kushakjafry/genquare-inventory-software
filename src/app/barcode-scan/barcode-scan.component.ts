@@ -164,7 +164,7 @@ export class BarcodeScanComponent implements OnInit {
       let book: any[] = JSON.parse(localStorage.getItem("book")) || [];
       if (bookSkuId) {
         if (parseInt(bookSkuId) === -1) {
-          localStorage.removeItem(bookSkuId);
+          localStorage.removeItem(skuid);
           book.splice(book.indexOf(skuid), 1);
           localStorage.setItem("book", JSON.stringify(book));
         } else {
@@ -252,11 +252,12 @@ export class BarcodeScanComponent implements OnInit {
     } else {
       this.showRemoveForm = true;
       let skuid = this.removeForm.value.skuIdRemove;
+      console.log(skuid);
       let bookSkuId = localStorage.getItem(skuid) || "";
       let book: any[] = JSON.parse(localStorage.getItem("book")) || [];
       if (bookSkuId) {
         if (parseInt(bookSkuId) === 1) {
-          localStorage.removeItem(bookSkuId);
+          localStorage.removeItem(skuid);
           book.splice(book.indexOf(skuid), 1);
           localStorage.setItem("book", JSON.stringify(book));
         } else {
