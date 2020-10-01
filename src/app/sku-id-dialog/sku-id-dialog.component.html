@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <p>Scan barcode for skuId or enter it manually</p>
+  <mat-form-field>
+    <mat-label>SkuId</mat-label>
+    <input matInput [(ngModel)]="data.skuId" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.skuId" cdkFocusInitial>Ok</button>
+</div>

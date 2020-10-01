@@ -1,0 +1,204 @@
+<h2 mat-dialog-title>Invoice Form</h2>
+<form
+  novalidate
+  [formGroup]="invoiceForm"
+  #invoiceform
+  *ngIf="invoiceForm"
+  (ngSubmit)="onSubmit()"
+>
+  <mat-dialog-content class="mat-typography">
+    <mat-form-field appearance="outline" class="customerName">
+      <mat-label>Customer Name</mat-label>
+      <input
+        matInput
+        placeholder="Enter Customers Name"
+        formControlName="customerName"
+      />
+      <mat-error *ngIf="invoiceForm.get('customerName').errors?.required"
+        >Customer Name is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="customerPhone">
+      <mat-label>Customer Phone Number</mat-label>
+      <input matInput formControlName="customerPhone" />
+      <mat-error *ngIf="invoiceForm.get('customerPhone').errors?.required"
+        >Customer Phone Number is required</mat-error
+      >
+      <mat-error *ngIf="invoiceForm.get('customerPhone').errors?.pattern">
+        Invalid Phone Number
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="customerAddress">
+      <mat-label>Customer Address</mat-label>
+      <input matInput formControlName="customerAddress" />
+      <mat-error *ngIf="invoiceForm.get('customerAddress').errors?.required"
+        >Customer Phone Number is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="invoiceNumber">
+      <mat-label>Invoice No.</mat-label>
+      <input matInput formControlName="invoiceNumber" readonly />
+      <mat-error *ngIf="invoiceForm.get('invoiceNumber').errors?.required"
+        >Invoice Number is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="invoiceDate">
+      <mat-label>Invoice Date</mat-label>
+      <input
+        matInput
+        formControlName="invoiceDate"
+        value="invoiceForm.value.invoiceDate | date"
+        [matDatepicker]="picker"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="sellingPlatform">
+      <mat-label>Selling Platform</mat-label>
+      <input matInput formControlName="sellingPlatform" disabled />
+      <mat-error *ngIf="invoiceForm.get('sellingPlatform').errors?.required"
+        >Selling platform is required</mat-error
+      >
+    </mat-form-field>
+    <h2>Add Items</h2>
+    <ng-container formArrayName="books">
+      <mat-table [dataSource]="dataSource">
+        <mat-header-row *matHeaderRowDef="cols"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: cols"></mat-row>
+        <!-- Name -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell
+            *matCellDef="let element; let index = index"
+            [formGroupName]="index"
+          >
+            <input
+              matInput
+              placeholder="name"
+              type="text"
+              formControlName="name"
+              required
+            />
+          </mat-cell>
+        </ng-container>
+        <!--Sku Id-->
+        <ng-container matColumnDef="skuId">
+          <mat-header-cell *matHeaderCellDef> SKU ID </mat-header-cell>
+          <mat-cell
+            *matCellDef="let element; let index = index"
+            [formGroupName]="index"
+          >
+            <input
+              matInput
+              placeholder="sku id"
+              type="text"
+              formControlName="skuId"
+              required
+            />
+          </mat-cell>
+        </ng-container>
+        <!--Quantity-->   
+        <ng-container matColumnDef="quantity">
+          <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+          <mat-cell
+            *matCellDef="let element; let index = index"
+            [formGroupName]="index"
+          >
+            <input
+              matInput
+              placeholder="Quantity"
+              type="text"
+              formControlName="quantity"
+              required
+            />
+          </mat-cell>
+        </ng-container>
+        <!--Cost Price-->   
+        <ng-container matColumnDef="costPrice">
+          <mat-header-cell *matHeaderCellDef> Cost Price </mat-header-cell>
+          <mat-cell
+            *matCellDef="let element; let index = index"
+            [formGroupName]="index"
+          >
+            <input
+              matInput
+              placeholder="Quantity"
+              type="text"
+              formControlName="costPrice"
+              required
+            />
+          </mat-cell>
+        </ng-container>
+        <!--Discount-->   
+        <ng-container matColumnDef="discount">
+          <mat-header-cell *matHeaderCellDef> Discount in % </mat-header-cell>
+          <mat-cell
+            *matCellDef="let element; let index = index"
+            [formGroupName]="index"
+          >
+            <input
+              matInput
+              placeholder="Discount"
+              type="text"
+              formControlName="discount"
+              required
+            />
+          </mat-cell>
+        </ng-container>
+        <!--Discounted Price-->   
+        <ng-container matColumnDef="discountedPrice">
+          <mat-header-cell *matHeaderCellDef>
+            Discounted Price
+          </mat-header-cell>
+          <mat-cell
+            *matCellDef="let element; let index = index"
+            [formGroupName]="index"
+          >
+            <input
+              matInput
+              placeholder="Discounted Price"
+              type="text"
+              value="{{ books.controls[index].value.discountedPrice }}"
+              formControlName="discountedPrice"
+              readonly
+              required
+            />
+          </mat-cell>
+        </ng-container>
+        <!--Publisher-->   
+        <ng-container matColumnDef="publisher">
+          <mat-header-cell *matHeaderCellDef> Publisher </mat-header-cell>
+          <mat-cell
+            *matCellDef="let element; let index = index"
+            [formGroupName]="index"
+          >
+            <input
+              matInput
+              placeholder="Publisher"
+              type="text"
+              formControlName="publisher"
+              required
+            />
+          </mat-cell>
+        </ng-container>
+      </mat-table>
+    </ng-container>
+    <button
+      mat-mini-fab
+      color="primary"
+      type="button"
+      style="margin-top: 15px"
+      (click)="addFormGroupClicked()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <div style="text-align: right">
+      <h3>Total Cost</h3>
+      {{ totalPrice }}
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" cdkFocusInitial>Generate Invoice</button>
+  </mat-dialog-actions>
+</form>

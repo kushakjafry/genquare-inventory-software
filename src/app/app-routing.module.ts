@@ -5,13 +5,13 @@ import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { AddBookComponent } from "./add-book/add-book.component";
 import { BarcodeScanComponent } from "./barcode-scan/barcode-scan.component";
-import { SyncBookComponent } from "./sync-book/sync-book.component";
+// import { SyncBookComponent } from "./sync-book/sync-book.component";
 
 const routes: Routes = [
   { path: "book", component: BookListComponent, canActivate: [AuthGuard] },
   { path: "addbook", component: AddBookComponent, canActivate: [AuthGuard] },
   { path: "scan", component: BarcodeScanComponent, canActivate: [AuthGuard] },
-  { path: "sync", component: SyncBookComponent, canActivate: [AuthGuard] },
+  // { path: "sync", component: SyncBookComponent, canActivate: [AuthGuard] },
   { path: "login", component: LoginComponent },
   { path: "", redirectTo: "/scan", pathMatch: "full" },
 ];

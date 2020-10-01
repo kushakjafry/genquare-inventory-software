@@ -1,0 +1,28 @@
+:host {
+  position: relative;
+  padding: 0px;
+}
+.dialog-toolbar {
+  width: 600px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+mat-form-field:disabled {
+  color: black;
+  opacity: 1;
+}
+.customerName,
+.customerPhone,
+.invoiceNumber,
+.invoiceDate,
+.sellingPlatform {
+  width: 40%;
+}
+.customerAddress {
+  width: 80%;
+}
+.customerPhone,
+.invoiceDate {
+  margin-left: 20px;
+}

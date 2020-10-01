@@ -20,6 +20,11 @@ export class BookService {
       .get<BOOK[]>(`${baseURL}books`)
       .pipe(catchError(this.processHttpErrorMsgService.handleError));
   }
+  getBook(skuId: string): Observable<BOOK> {
+    return this.http
+      .get<BOOK>(`${baseURL}books/${skuId}`)
+      .pipe(catchError(this.processHttpErrorMsgService.handleError));
+  }
   updateBook(skuId: string, bookObject: any): Observable<BOOK> {
     return this.http
       .put<BOOK>(`${baseURL}books/${skuId}`, bookObject)

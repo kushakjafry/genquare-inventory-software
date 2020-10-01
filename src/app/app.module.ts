@@ -40,11 +40,14 @@ import {
   UnauthorizedInterceptor,
 } from "./services/auth.interceptor";
 import { BarcodeScanComponent } from "./barcode-scan/barcode-scan.component";
+import { InvoiceService } from "./services/invoice.service";
 
 //Directive
 import { AutofocusDirective } from "./directives/autofocus.directive";
-import { SyncBookComponent } from "./sync-book/sync-book.component";
-import { FileUploadBooksComponent } from './file-upload-books/file-upload-books.component';
+// import { SyncBookComponent } from "./sync-book/sync-book.component";
+import { FileUploadBooksComponent } from "./file-upload-books/file-upload-books.component";
+import { InvoiceDialogComponent } from "./invoice-dialog/invoice-dialog.component";
+import { SkuIdDialogComponent } from './sku-id-dialog/sku-id-dialog.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -61,8 +64,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AddBookComponent,
     BarcodeScanComponent,
     AutofocusDirective,
-    SyncBookComponent,
+    // SyncBookComponent,
     FileUploadBooksComponent,
+    InvoiceDialogComponent,
+    SkuIdDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,6 +93,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AuthService,
     ProcessHttpErrorMsgService,
     SnackbarService,
+    InvoiceService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
