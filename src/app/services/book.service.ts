@@ -51,7 +51,7 @@ export class BookService {
       .delete(`${baseURL}books/${skuId}`)
       .pipe(catchError(this.processHttpErrorMsgService.handleError));
   }
-  bookSync(skuIds: any): Observable<any> {
+  bookUpdateManyStocks(skuIds: any): Observable<any> {
     return this.http
       .post(`${baseURL}books/updateMany`, skuIds)
       .pipe(catchError(this.processHttpErrorMsgService.handleError));

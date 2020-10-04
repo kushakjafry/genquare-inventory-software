@@ -211,22 +211,14 @@ export class BarcodeScanComponent implements OnInit {
           data: data,
         });
         dialogRef.afterClosed().subscribe((result) => {
-          console.log(`Dialog result: ${result}`);
-          if (!this.booksRemoved[skuId]) {
-            this.booksRemoved[skuId] = -1;
-          } else {
-            this.booksRemoved[skuId] = this.booksRemoved[skuId] - 1;
-          }
-          this.snackbarService.openSnackBar(`invoice was added`, "cancel");
-          let updated: any = { skuId: skuId, stocks: this.booksRemoved[skuId] };
-          let obj = this.booksUpdatedRemoved.find((obj) => obj.skuId === skuId);
-          if (obj) {
-            this.booksUpdatedRemoved.splice(
-              this.booksUpdatedRemoved.indexOf(obj),
-              1
-            );
-          }
-          this.booksUpdatedRemoved.unshift(updated);
+          console.log(result.controls);
+          result.controls.forEach((element) => {
+            let obj = {
+              skuId: element.value.skuId,
+              stocks: element.value.quantity,
+            };
+            this.booksUpdatedRemoved.unshift(obj);
+          });
           this.removeDataSource = this.booksUpdatedRemoved;
         });
       },

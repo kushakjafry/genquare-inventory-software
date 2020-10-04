@@ -1,0 +1,113 @@
+product[stock_data][min_qty_allowed_in_shopping_cart][0][customer_group_id]: 32000
+product[stock_data][min_qty_allowed_in_shopping_cart][0][min_sale_qty]: 
+product[stock_data][min_qty_allowed_in_shopping_cart][0][record_id]: 0
+product[stock_data][min_qty]: 0
+product[stock_data][max_sale_qty]: 10000
+product[stock_data][notify_stock_qty]: 1
+product[stock_data][min_sale_qty]: 1
+product[stock_data][qty_increments]: 1
+product[stock_data][use_config_manage_stock]: 1
+product[stock_data][manage_stock]: 1
+product[stock_data][use_config_min_qty]: 1
+product[stock_data][use_config_max_sale_qty]: 1
+product[stock_data][use_config_backorders]: 1
+product[stock_data][backorders]: 0
+product[stock_data][use_config_notify_stock_qty]: 1
+product[stock_data][use_config_enable_qty_inc]: 1
+product[stock_data][enable_qty_increments]: 0
+product[stock_data][use_config_qty_increments]: 1
+product[stock_data][use_config_min_sale_qty]: 1
+product[stock_data][is_qty_decimal]: 0
+product[stock_data][is_decimal_divided]: 0
+product[gift_message_available]: 1
+product[use_config_gift_message_available]: 0
+product[attribute_set_id]: 4
+product[links_title]: Links
+product[links_purchased_separately]: 0
+product[samples_title]: Samples
+product[status]: 1
+product[affect_product_custom_options]: 1
+product[name]: Islam Science Aur Musalman
+product[weight]: 402.3
+product[url_key]: islam-science-aur-musalman
+product[edition]: first
+product[isbn10]: 
+product[isbn13]: 
+product[pages]: 352
+product[special_price]: 
+product[cost]: 
+product[sm_featured]: 1
+product[website_ids][1]: 1
+product[sku]: GQAA00117
+product[meta_title]: Islam Science Aur Musalman
+product[meta_keyword]: Islam Science Aur Musalman
+product[meta_description]: Islam Science Aur Musalman A book written by Abu Ali Abdul Wakil
+product[price]: 250
+product[quantity_and_stock_status][is_in_stock]: 1
+product[quantity_and_stock_status][qty]: 100
+product[tax_class_id]: 0
+product[product_has_weight]: 1
+product[visibility]: 4
+product[country_of_manufacture]: IN
+product[page_layout]: 
+product[options_container]: container2
+product[custom_layout_update_file]: __no_update__
+product[custom_design]: 
+product[custom_layout]: 
+product[binding_type]: 5431
+product[country_of_publisher]: 5433
+product[publication_year]: 5488
+product[publisher]: 5500
+product[language][0]: 5436
+product[news_from_date]: 10/02/2020
+product[news_to_date]: 10/31/2020
+product[custom_design_from]: 
+product[custom_design_to]: 
+product[special_from_date]: 
+product[special_to_date]: 
+product[description]: A book written by Abu Ali Abdul Wakil
+product[short_description]: A book written by Abu Ali Abdul Wakil
+product[category_ids][0]: 5
+product[category_ids][1]: 9
+product[category_ids][2]: 11
+product[category_ids][3]: 12
+product[category_ids][4]: 128
+is_downloadable: 0
+affect_configurable_product_attributes: 1
+new-variations-attribute-set-id: 4
+links[related][0][id]: 4
+links[related][0][name]: Al-Quran Al Kareem (Large) Arabic Only Best Quality (Arabic)
+links[related][0][status]: Enabled
+links[related][0][attribute_set]: Default
+links[related][0][sku]: GQMN00002
+links[related][0][price]: ₹400.00
+links[related][0][thumbnail]: https://www.genquare.com/pub/media/catalog/product/cache/f36919129c38a681b09ba4f01be107ea/G/Q/GQMN00002_9.jpg
+links[related][0][position]: 1
+links[related][0][record_id]: 4
+links[upsell][0][id]: 3
+links[upsell][0][name]: Al-Quran Al-Kareem - BEST QUALITY (Arabic) - Small Sized Blue Colored
+links[upsell][0][status]: Enabled
+links[upsell][0][attribute_set]: Default
+links[upsell][0][sku]: GQMN00001
+links[upsell][0][price]: ₹290.00
+links[upsell][0][thumbnail]: https://www.genquare.com/pub/media/catalog/product/cache/f36919129c38a681b09ba4f01be107ea/G/Q/GQMN00001_9.jpg
+links[upsell][0][position]: 1
+links[upsell][0][record_id]: 3
+links[crosssell][0][id]: 5
+links[crosssell][0][name]: NAMAL
+links[crosssell][0][status]: Enabled
+links[crosssell][0][attribute_set]: Default
+links[crosssell][0][sku]: GQMN00003
+links[crosssell][0][price]: ₹1,200.00
+links[crosssell][0][thumbnail]: https://www.genquare.com/pub/media/catalog/product/cache/f36919129c38a681b09ba4f01be107ea/G/Q/GQMN00003_9.jpg
+links[crosssell][0][position]: 1
+links[crosssell][0][record_id]: 5
+use_default[gift_message_available]: 0
+configurable-matrix-serialized: []
+associated_product_ids_serialized: []
+back: new
+product[image]: 
+product[small_image]: 
+product[swatch_image]: 
+product[thumbnail]: 
+form_key: bxkXrtBDw1jhVW10

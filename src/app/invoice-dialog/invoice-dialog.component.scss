@@ -8,21 +8,28 @@
   top: 0;
   left: 0;
 }
-mat-form-field:disabled {
-  color: black;
-  opacity: 1;
+#customerForm {
+  display: flex;
+  flex-direction: column;
+  .nameQrCode,
+  #customerAddress,
+  #invoicePhone,
+  #dateSellingPlatform {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    mat-form-field,
+    #printingQRCode {
+      width: 40%;
+    }
+    #printingQRCode {
+      text-align: right;
+    }
+  }
 }
-.customerName,
-.customerPhone,
-.invoiceNumber,
-.invoiceDate,
-.sellingPlatform {
-  width: 40%;
-}
-.customerAddress {
-  width: 80%;
-}
-.customerPhone,
-.invoiceDate {
-  margin-left: 20px;
+mat-cell {
+  mat-form-field {
+    width: 80%;
+  }
 }

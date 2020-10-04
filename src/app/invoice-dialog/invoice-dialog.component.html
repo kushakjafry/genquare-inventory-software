@@ -7,61 +7,92 @@
   (ngSubmit)="onSubmit()"
 >
   <mat-dialog-content class="mat-typography">
-    <mat-form-field appearance="outline" class="customerName">
-      <mat-label>Customer Name</mat-label>
-      <input
-        matInput
-        placeholder="Enter Customers Name"
-        formControlName="customerName"
-      />
-      <mat-error *ngIf="invoiceForm.get('customerName').errors?.required"
-        >Customer Name is required</mat-error
-      >
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="customerPhone">
-      <mat-label>Customer Phone Number</mat-label>
-      <input matInput formControlName="customerPhone" />
-      <mat-error *ngIf="invoiceForm.get('customerPhone').errors?.required"
-        >Customer Phone Number is required</mat-error
-      >
-      <mat-error *ngIf="invoiceForm.get('customerPhone').errors?.pattern">
-        Invalid Phone Number
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="customerAddress">
-      <mat-label>Customer Address</mat-label>
-      <input matInput formControlName="customerAddress" />
-      <mat-error *ngIf="invoiceForm.get('customerAddress').errors?.required"
-        >Customer Phone Number is required</mat-error
-      >
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="invoiceNumber">
-      <mat-label>Invoice No.</mat-label>
-      <input matInput formControlName="invoiceNumber" readonly />
-      <mat-error *ngIf="invoiceForm.get('invoiceNumber').errors?.required"
-        >Invoice Number is required</mat-error
-      >
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="invoiceDate">
-      <mat-label>Invoice Date</mat-label>
-      <input
-        matInput
-        formControlName="invoiceDate"
-        value="invoiceForm.value.invoiceDate | date"
-        [matDatepicker]="picker"
-      />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="sellingPlatform">
-      <mat-label>Selling Platform</mat-label>
-      <input matInput formControlName="sellingPlatform" disabled />
-      <mat-error *ngIf="invoiceForm.get('sellingPlatform').errors?.required"
-        >Selling platform is required</mat-error
-      >
-    </mat-form-field>
+    <div id="customerForm">
+      <div class="nameQrCode">
+        <mat-form-field appearance="outline" class="customerName">
+          <mat-label>Customer Name</mat-label>
+          <input
+            matInput
+            placeholder="Enter Customers Name"
+            formControlName="customerName"
+          />
+          <mat-error *ngIf="invoiceForm.get('customerName').errors?.required"
+            >Customer Name is required</mat-error
+          >
+        </mat-form-field>
+        <div *ngIf="invoiceNumber" id="printingQRCode">
+          <ngx-qrcode
+            [elementType]="elementType"
+            [value]="invoiceNumber"
+            errorCorrectionLevel="L"
+          >
+          </ngx-qrcode>
+        </div>
+      </div>
+      <div id="customerAddress">
+        <mat-form-field appearance="outline" class="customerAddress">
+          <mat-label>Customer Address</mat-label>
+          <input matInput formControlName="customerAddress" />
+          <mat-error *ngIf="invoiceForm.get('customerAddress').errors?.required"
+            >Customer Address is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="customerPincode">
+          <mat-label>Customer Pincode</mat-label>
+          <input matInput formControlName="customerPincode" />
+          <mat-error *ngIf="invoiceForm.get('customerPincode').errors?.required"
+            >Pincode is required</mat-error
+          >
+          <mat-error *ngIf="invoiceForm.get('customerPincode').errors?.pattern"
+            >Pincode is invalid</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div id="invoicePhone">
+        <mat-form-field appearance="outline" class="invoiceNumber">
+          <mat-label>Invoice No.</mat-label>
+          <input matInput formControlName="invoiceNumber" readonly />
+          <mat-error *ngIf="invoiceForm.get('invoiceNumber').errors?.required"
+            >Invoice Number is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="customerPhone">
+          <mat-label>Customer Phone Number</mat-label>
+          <input matInput formControlName="customerPhone" />
+          <mat-error *ngIf="invoiceForm.get('customerPhone').errors?.required"
+            >Customer Phone Number is required</mat-error
+          >
+          <mat-error *ngIf="invoiceForm.get('customerPhone').errors?.pattern">
+            Invalid Phone Number
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div id="dateSellingPlatform">
+        <mat-form-field appearance="outline" class="invoiceDate">
+          <mat-label>Invoice Date</mat-label>
+          <input
+            matInput
+            formControlName="invoiceDate"
+            value="invoiceForm.value.invoiceDate | date"
+            [matDatepicker]="picker"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="sellingPlatform">
+          <mat-label>Selling Platform</mat-label>
+          <input matInput formControlName="sellingPlatform" disabled />
+          <mat-error *ngIf="invoiceForm.get('sellingPlatform').errors?.required"
+            >Selling platform is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
     <h2>Add Items</h2>
-    <ng-container formArrayName="books">
+    <ng-container formArrayName="invoiceItems">
       <mat-table [dataSource]="dataSource">
         <mat-header-row *matHeaderRowDef="cols"></mat-header-row>
         <mat-row *matRowDef="let row; columns: cols"></mat-row>
@@ -72,13 +103,22 @@
             *matCellDef="let element; let index = index"
             [formGroupName]="index"
           >
-            <input
-              matInput
-              placeholder="name"
-              type="text"
-              formControlName="name"
-              required
-            />
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="name"
+                required
+                readonly
+              />
+              <mat-error
+                *ngIf="
+                  invoiceItems.controls[index].get('name').errors?.required
+                "
+              >
+                Book Name is required
+              </mat-error>
+            </mat-form-field>
           </mat-cell>
         </ng-container>
         <!--Sku Id-->
@@ -88,13 +128,21 @@
             *matCellDef="let element; let index = index"
             [formGroupName]="index"
           >
-            <input
-              matInput
-              placeholder="sku id"
-              type="text"
-              formControlName="skuId"
-              required
-            />
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="sku_Id"
+                required
+                readonly
+              />
+              <mat-error
+                *ngIf="
+                  invoiceItems.controls[index].get('sku_Id').errors?.required
+                "
+                >Sku Id is required
+              </mat-error>
+            </mat-form-field>
           </mat-cell>
         </ng-container>
         <!--Quantity-->   
@@ -104,13 +152,31 @@
             *matCellDef="let element; let index = index"
             [formGroupName]="index"
           >
-            <input
-              matInput
-              placeholder="Quantity"
-              type="text"
-              formControlName="quantity"
-              required
-            />
+            <mat-form-field>
+              <input
+                matInput
+                type="number"
+                formControlName="quantity"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  invoiceItems.controls[index].get('quantity').errors?.required
+                "
+                >Quantity is required
+              </mat-error>
+              <mat-error
+                *ngIf="invoiceItems.controls[index].get('quantity').errors?.max"
+                >cannot exceed
+                {{
+                  stockObj[invoiceItems.controls[index].get("sku_Id").value]
+                }}</mat-error
+              >
+              <mat-error
+                *ngIf="invoiceItems.controls[index].get('quantity').errors?.min"
+                >must be greater than 0
+              </mat-error>
+            </mat-form-field>
           </mat-cell>
         </ng-container>
         <!--Cost Price-->   
@@ -120,13 +186,28 @@
             *matCellDef="let element; let index = index"
             [formGroupName]="index"
           >
-            <input
-              matInput
-              placeholder="Quantity"
-              type="text"
-              formControlName="costPrice"
-              required
-            />
+            <mat-form-field>
+              <input
+                matInput
+                type="number"
+                formControlName="costPrice"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  invoiceItems.controls[index].get('costPrice').errors?.required
+                "
+              >
+                Selling Price is required
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  invoiceItems.controls[index].get('costPrice').errors?.min
+                "
+              >
+                must be greater than 0
+              </mat-error>
+            </mat-form-field>
           </mat-cell>
         </ng-container>
         <!--Discount-->   
@@ -136,13 +217,31 @@
             *matCellDef="let element; let index = index"
             [formGroupName]="index"
           >
-            <input
-              matInput
-              placeholder="Discount"
-              type="text"
-              formControlName="discount"
-              required
-            />
+            <mat-form-field>
+              <input
+                matInput
+                type="number"
+                formControlName="discount"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  invoiceItems.controls[index].get('discount').errors?.required
+                "
+              >
+                discount is required
+              </mat-error>
+              <mat-error
+                *ngIf="invoiceItems.controls[index].get('discount').errors?.min"
+              >
+                must not be negative
+              </mat-error>
+              <mat-error
+                *ngIf="invoiceItems.controls[index].get('discount').errors?.max"
+              >
+                must be less than 100
+              </mat-error>
+            </mat-form-field>
           </mat-cell>
         </ng-container>
         <!--Discounted Price-->   
@@ -154,15 +253,24 @@
             *matCellDef="let element; let index = index"
             [formGroupName]="index"
           >
-            <input
-              matInput
-              placeholder="Discounted Price"
-              type="text"
-              value="{{ books.controls[index].value.discountedPrice }}"
-              formControlName="discountedPrice"
-              readonly
-              required
-            />
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                value="{{ invoiceItems.controls[index].value.discountedPrice }}"
+                formControlName="discountedPrice"
+                readonly
+                required
+              />
+              <mat-error
+                *ngIf="
+                  invoiceItems.controls[index].get('discountedPrice').errors
+                    ?.required
+                "
+              >
+                discountedPrice is required
+              </mat-error>
+            </mat-form-field>
           </mat-cell>
         </ng-container>
         <!--Publisher-->   
@@ -172,13 +280,22 @@
             *matCellDef="let element; let index = index"
             [formGroupName]="index"
           >
-            <input
-              matInput
-              placeholder="Publisher"
-              type="text"
-              formControlName="publisher"
-              required
-            />
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="publisher"
+                required
+                readonly
+              />
+              <mat-error
+                *ngIf="
+                  invoiceItems.controls[index].get('publisher').errors?.required
+                "
+              >
+                Publisher is required
+              </mat-error>
+            </mat-form-field>
           </mat-cell>
         </ng-container>
       </mat-table>
@@ -198,7 +315,185 @@
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
+    <button
+      mat-button
+      type="button"
+      (click)="printQrCode()"
+      [disabled]="invoiceForm.invalid"
+    >
+      Print QrCode
+    </button>
+    <button mat-button type="button" (click)="printInvoice()">
+      Print Invoice
+    </button>
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button type="submit" cdkFocusInitial>Generate Invoice</button>
+    <button
+      mat-button
+      type="submit"
+      cdkFocusInitial
+      [disabled]="invoiceForm.invalid"
+    >
+      Generate Invoice
+    </button>
   </mat-dialog-actions>
 </form>
+<div style="display: none" *ngIf="invoiceForm && invoiceForm.valid">
+  <div id="container">
+    <div class="invoice-top">
+      <section id="memo">
+        <div class="logo"></div>
+
+        <div class="company-info">
+          <span class="company-name">Genquare Inventory</span>
+
+          <span class="spacer1"></span>
+
+          <div>713347</div>
+          <div>New Delhi, India</div>
+
+          <span class="clearfix"></span>
+
+          <div>9999911111</div>
+          <div>admin@genquare.com</div>
+        </div>
+      </section>
+
+      <section id="invoice-info">
+        <div>
+          <span></span>
+          <span></span>
+          <span>Selling Platform</span>
+          <span>Issue Date</span>
+        </div>
+
+        <div>
+          <span></span>
+          <span></span>
+          <span>{{ invoiceForm.value.sellingPlatform }}</span>
+          <span>{{ invoiceForm.value.invoiceDate | date }}</span>
+        </div>
+
+        <span class="clearfix"></span>
+
+        <section id="invoice-title-number">
+          <span id="title">Invoice No.</span>
+          <span id="number">{{ invoiceForm.value.invoiceNumber }}</span>
+        </section>
+      </section>
+
+      <section id="client-info">
+        <span>To.</span>
+        <div>
+          <span class="bold">{{ invoiceForm.value.customerName }}</span>
+        </div>
+
+        <div>
+          <span>{{ invoiceForm.value.customerAddress }}</span>
+        </div>
+
+        <div>
+          <span>{{ invoiceForm.value.customerPincode }}</span>
+        </div>
+
+        <div>
+          <span>{{ invoiceForm.value.customerPhone }}</span>
+        </div>
+
+        <!-- <div>
+          <span>{client_email}</span>
+        </div>
+
+        <div>
+          <span>{client_other}</span>
+        </div> -->
+      </section>
+
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="invoice-body">
+      <section id="items">
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <th></th>
+            <!-- Dummy cell for the row number and row commands -->
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Publisher</th>
+            <th>Selling Price</th>
+            <th>Discount</th>
+            <th>Total Price</th>
+          </tr>
+
+          <tr *ngFor="let data of invoiceItems.controls; index as i">
+            <td>{{ i + 1 }}</td>
+            <!-- Don't remove this column as it's needed for the row commands -->
+            <td>{{ data.get("name").value }}</td>
+            <td>{{ data.get("quantity").value }}</td>
+            <td>{{ data.get("publisher").value }}</td>
+            <td>{{ data.get("costPrice").value }}</td>
+            <td>{{ data.get("discount").value }}</td>
+            <td>{{ data.get("discountedPrice").value }}</td>
+          </tr>
+        </table>
+      </section>
+
+      <section id="sums">
+        <table cellpadding="0" cellspacing="0">
+          <!-- <tr>
+            <th>{amount_subtotal_label}</th>
+            <td>{amount_subtotal}</td>
+            <td></td>
+          </tr> -->
+
+          <!-- <tr data-iterate="tax">
+            <th>{tax_name}</th>
+            <td>{tax_value}</td>
+            <td></td>
+          </tr> -->
+
+          <tr class="amount-total">
+            <th>Total</th>
+            <td>{{ invoiceForm.value.totalPrice }}</td>
+            <td>
+              <div class="currency">
+                <span>INR</span> <span>{{ invoiceForm.value.totalPrice }}</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- You can use attribute data-hide-on-quote="true" to hide specific information on quotes.
+                 For example Invoicebus doesn't need amount paid and amount due on quotes  -->
+          <!-- <tr data-hide-on-quote="true">
+            <th>{amount_paid_label}</th>
+            <td>{amount_paid}</td>
+            <td></td>
+          </tr> -->
+
+          <!-- <tr data-hide-on-quote="true">
+            <th>{amount_due_label}</th>
+            <td>{amount_due}</td>
+            <td></td>
+          </tr> -->
+        </table>
+      </section>
+
+      <div class="clearfix"></div>
+
+      <section id="terms">
+        <span class="hidden">terms and condition</span>
+        <div>kushak</div>
+      </section>
+
+      <!-- <div class="payment-info">
+        <div>{payment_info1}</div>
+        <div>{payment_info2}</div>
+        <div>{payment_info3}</div>
+        <div>{payment_info4}</div>
+        <div>{payment_info5}</div>
+      </div> -->
+    </div>
+  </div>
+</div>
