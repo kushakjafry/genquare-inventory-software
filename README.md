@@ -1,6 +1,7 @@
 # Introduction
 
 Bootstrap and package your project with Angular 10 and Electron 9 (Typescript + SASS + Hot Reload) for creating Desktop applications.
+This project is bootstraped by using the template from [maximegris/angular-electron](https://github.com/maximegris/angular-electron).
 
 Currently runs with:
 
