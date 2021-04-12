@@ -75,7 +75,19 @@ export class InvoiceDialogComponent implements OnInit {
   get invoiceItems(): FormArray {
     return this.invoiceForm.get("invoiceItems") as FormArray;
   }
+  public findInvalidControls() {
+    const invalid = [];
+    const controls = this.invoiceItems.controls;
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
+    }
+    return invalid;
+  }
   updateForm(data) {
+    console.log(data);
+    console.log(this.invoiceItems);
     const items = data.invoiceItems;
     let totalPrice = 0;
     for (let i of items) {
@@ -176,7 +188,7 @@ export class InvoiceDialogComponent implements OnInit {
         costPrice: [skuIdData.price, [Validators.required, Validators.min(1)]],
         discount: [
           0,
-          [Validators.required, Validators.min(1), Validators.max(100)],
+          [Validators.required, Validators.min(0), Validators.max(100)],
         ],
         discountedPrice: [skuIdData.price, Validators.required],
         publisher: [skuIdData.publisher, Validators.required],
@@ -246,6 +258,7 @@ export class InvoiceDialogComponent implements OnInit {
     PrintJs("printingQRCode", "html");
   }
   printInvoice() {
+    console.log(this.findInvalidControls());
     let printContents, popupWin;
     printContents = document.getElementById("container").innerHTML;
     popupWin = window.open("", "_blank", "top=0,left=0,height=100%,width=auto");
