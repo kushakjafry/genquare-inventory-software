@@ -2,7 +2,7 @@
 
 ### Inventroy Mangement App
 
-Based on idea of managing inventories using barcode/SkuId.
+Based on idea of managing inventories using barcode/SkuId.<br/>
 Backend for this application available [here](https://github.com/kushakjafry/genquare-inventory-server)  
 This project is bootstraped by using the template from [maximegris/angular-electron](https://github.com/maximegris/angular-electron).<br/><br/>
 
