@@ -1,10 +1,13 @@
 # Introduction
 
-Inventroy Mangement App,
-This project is bootstraped by using the template from [maximegris/angular-electron](https://github.com/maximegris/angular-electron).
+### Inventroy Mangement App
+
 Based on idea of managing inventories using barcode/SkuId.
-Backend for this application available [here](https://github.com/kushakjafry/genquare-inventory-server)
-![Page](./src/assets/githubImages/2.jpg?raw=true "HomePage")
+Backend for this application available [here](https://github.com/kushakjafry/genquare-inventory-server)  
+This project is bootstraped by using the template from [maximegris/angular-electron](https://github.com/maximegris/angular-electron).<br>
+![BookListPage](./src/assets/githubImages/2.jpg?raw=true "Book List Page")
+![Barcode Scanner Page](./src/assets/githubImages/1.jpg?raw=true "Barcode Scanner Page")
+![Login Page](./src/assets/githubImages/3.jpg?raw=true "Login Page")
 
 Currently runs with:
 
