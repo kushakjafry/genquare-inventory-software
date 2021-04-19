@@ -1,23 +1,16 @@
 # Introduction
 
-Bootstrap and package your project with Angular 10 and Electron 9 (Typescript + SASS + Hot Reload) for creating Desktop applications.
+Inventroy Mangement App,
 This project is bootstraped by using the template from [maximegris/angular-electron](https://github.com/maximegris/angular-electron).
+Based on idea of managing inventories using barcode/SkuId.
+Backend for this application available [here](https://github.com/kushakjafry/genquare-inventory-server)
+![Page](./src/assets/githubImages/2.jpg?raw=true "HomePage")
 
 Currently runs with:
 
 - Angular v10.0.14
 - Electron v9.3.0
 - Electron Builder v22.8.0
-
-With this sample, you can :
-
-- Run your app in a local development environment with Electron & Hot reload
-- Run your app in a production environment
-- Package your app into an executable file for Linux, Windows & Mac
-
-/!\ Hot reload only pertains to the renderer process. The main electron process is not able to be hot reloaded, only restarted.
-
-/!\ Angular 10.x CLI needs Node 10.13 or later to work correctly.
 
 ## Getting Started
 
@@ -69,12 +62,6 @@ Maybe you only want to execute the application in the browser with hot reload ? 
 | `npm run build:prod`     | Build the app with Angular aot. Your built files are in the /dist folder.            |
 | `npm run electron:local` | Builds your application and start electron                                           |
 | `npm run electron:build` | Builds your application and creates an app consumable based on your operating system |
-
-**Your application is optimised. Only /dist folder and node dependencies are included in the executable.**
-
-## You want to use a specific lib (like rxjs) in electron main thread ?
-
-YES! You can do it! Just by importing your library in npm dependencies section (not **devDependencies**) with `npm install --save`. It will be loaded by electron during build phase and added to your final package. Then use your library by importing it in `main.ts` file. Quite simple, isn't it ?
 
 ## E2E Testing
 
