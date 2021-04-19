@@ -7,8 +7,8 @@ Backend for this application available [here](https://github.com/kushakjafry/gen
 This project is bootstraped by using the template from [maximegris/angular-electron](https://github.com/maximegris/angular-electron).<br/><br/>
 
 <p><img src="./src/assets/githubImages/2.jpg" alt="BookListPage"></p>
-<p><img src="./src/assets/githubImages/1.jpg" alt="Barcode Scanner Page" style="max-width: 425px">
-<img src="./src/assets/githubImages/3.jpg" alt="Login Page" style="max-width: 425px"></p>
+<p><img src="./src/assets/githubImages/1.jpg" alt="Barcode Scanner Page"></p>
+<p><img src="./src/assets/githubImages/3.jpg" alt="Login Page"></p>
 
 Currently runs with:
 
